@@ -22,6 +22,8 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 This example use https://github.com/typicode/jsonplaceholder#how-to
 
+Full example source code: https://github.com/victorlcampos/rapidax-example
+
 # Modules
 
 ```elixir
