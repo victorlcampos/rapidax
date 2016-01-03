@@ -3,18 +3,19 @@ defmodule Rapidax.Mixfile do
 
   def project do
     [app: :rapidax,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps,
+     package: package]
   end
 
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -30,5 +31,15 @@ defmodule Rapidax.Mixfile do
     [{:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.8.0"},
      {:poison, "~> 1.5"}]
+  end
+
+  defp package do
+    [# These are the default files included in the package
+     files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+     maintainers: ["Victor Lima Campos"],
+     licenses: ["Apache 2.0"],
+     description: "Rapidly develop your API client - based on rapidash gem",
+     links: %{"GitHub" => "https://github.com/victorlcampos/rapidax",
+              "Issues" => "https://github.com/victorlcampos/rapidax/issues"}]
   end
 end

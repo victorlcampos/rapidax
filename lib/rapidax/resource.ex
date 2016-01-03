@@ -1,5 +1,8 @@
 defmodule Rapidax.Resource do
-  defstruct [:name, :url, :resource, :id, params: []]
+  @resource_struct [:name, :url, :resource, :id, params: []]
+
+  defstruct @resource_struct
+  def resource_struct, do: @resource_struct
 
   def url(resource, extension \\ nil)
   def url(resource, nil), do: do_url(resource.name, resource.url, resource.id, resource.resource, "")
