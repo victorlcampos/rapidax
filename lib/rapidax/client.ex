@@ -1,21 +1,19 @@
 defmodule Rapidax.Client do
-  import Rapidax.Base
   alias Rapidax.Resource
 
-  defstruct [:site, :method, :use_patch, :extension]
-
-  def resources(client, resource) do
-    case get(build_url(client, resource)) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        {:ok, body}
-      {:ok, %HTTPoison.Response{status_code: 400, body: body}} ->
-        {:error, body}
-      {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
-        {:not_found, body }
-    end
+  def struct_fields do
+    [:site, :use_patch, :extension]
   end
 
-  defp build_url(client, resource) do
+  def parse_response({:ok, %HTTPoison.Response{status_code: 200, body: body}})    , do: {:ok, body}
+  def parse_response({:ok, %HTTPoison.Response{status_code: 201, body: body}})    , do: {:ok, body}
+  def parse_response({:ok, %HTTPoison.Response{status_code: 404, body: body}})    , do: {:not_found, body }
+  def parse_response({:ok, %HTTPoison.Response{status_code: _status, body: body}}), do: {:error, body}
+
+  def build_url(client, resource) do
     client.site <> Resource.url(resource, client.extension)
   end
+
+  def get_options(resource) , do: [params: Resource.params(resource)]
+  def post_options(resource), do: {:form, resource.params}
 end
