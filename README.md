@@ -1,6 +1,6 @@
 # Rapidax
 
-**TODO: Add description**
+Based on [Rapidash](https://github.com/Gazler/rapidash)
 
 ## Installation
 
