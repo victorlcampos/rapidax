@@ -23,17 +23,17 @@ defmodule Rapidax.ResourceTest do
   end
 
   test "resource with resource" do
-    resource = %Rapidax.Resource{name: "users", id: "victorlcampos", resource: %Rapidax.Resource { name: "repos" }}
+    resource = %Rapidax.Resource{name: "repos", belongs: %Rapidax.Resource { name: "users", id: "victorlcampos" }}
     assert Rapidax.Resource.url(resource) == "/users/victorlcampos/repos"
   end
 
   test "resource with resource with id" do
-    resource = %Rapidax.Resource{name: "users", id: "victorlcampos", resource: %Rapidax.Resource { name: "repos", id: "3" }}
+    resource = %Rapidax.Resource{name: "repos", id: "3", belongs: %Rapidax.Resource { name: "users", id: "victorlcampos" }}
     assert Rapidax.Resource.url(resource) == "/users/victorlcampos/repos/3"
   end
 
   test "resource with resource with resource" do
-    resource = %Rapidax.Resource{name: "users", id: "victorlcampos", resource: %Rapidax.Resource { name: "repos", id: "3", resource: %Rapidax.Resource { name: "commits" } }}
+    resource = %Rapidax.Resource{name: "commits", belongs: %Rapidax.Resource { name: "repos", id: "3", belongs: %Rapidax.Resource { name: "users", id: "victorlcampos" } }}
     assert Rapidax.Resource.url(resource) == "/users/victorlcampos/repos/3/commits"
   end
 end
