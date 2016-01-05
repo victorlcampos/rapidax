@@ -1,8 +1,10 @@
 defmodule Rapidax.Client do
   alias Rapidax.Resource
 
-  def struct_fields do
-    [:site, :use_patch, :extension]
+  defmacro __using__(params) do
+    quote do
+      defstruct [:site, :use_patch, :extension] ++ unquote(params)
+    end
   end
 
   def parse_response({:ok, %HTTPoison.Response{status_code: 200, body: body}})    , do: {:ok, body}

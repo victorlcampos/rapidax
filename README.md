@@ -28,24 +28,17 @@ Full example source code: https://github.com/victorlcampos/rapidax-example
 
 ```elixir
 defmodule RapidaxExample.Client do
-  import Rapidax.Client.Http
-  defstruct Rapidax.Client.Http.client_struct ++ [site: "http://jsonplaceholder.typicode.com"]
+  use Rapidax.Client.Http, [site: "http://jsonplaceholder.typicode.com"]
 end
 
 defmodule RapidaxExample.Resource.Post do
-  @resource_struct Rapidax.Resource.resource_struct ++ [name: "posts"]
-
-  defstruct @resource_struct
-  def resource_struct, do: @resource_struct
+  use Rapidax.Resource, [name: "posts"]
 end
 
 defmodule RapidaxExample.Resource.Comment do
   alias RapidaxExample.Resource.Post
 
-  @resource_struct  Rapidax.Resource.resource_struct ++ [name: "comments", belongs: %Post{}]
-
-  defstruct @resource_struct
-  def resource_struct, do: @resource_struct
+  use Rapidax.Resource, [name: "comments", belongs: %Post{}]
 end
 ```
 

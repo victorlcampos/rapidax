@@ -2,10 +2,11 @@ defmodule Rapidax.Client.Http do
   import Rapidax.Base
   import Rapidax.Client
 
-  @client_struct struct_fields ++ [:username, :password]
-
-  defstruct @client_struct
-  def client_struct, do: @client_struct
+  defmacro __using__(params) do
+    quote do
+      use Rapidax.Client, [:username, :password] ++ unquote(params)
+    end
+  end
 
   def query(client, resource) do
     parse_response(get(build_url(client, resource), [], hackney_options(client) ++ get_options(resource)))
