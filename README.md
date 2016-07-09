@@ -9,7 +9,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add rapidax to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:rapidax, "~> 0.0.3"}]
+          [{:rapidax, "~> 0.0.4"}]
         end
 
   2. Ensure rapidax is started before your application:
@@ -48,7 +48,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.query(%Client{}, %Post{id: "1"})
+  {:ok, body} = Client.query(%Client{}, %Post{id: "1"})
 ```
 
 # Listing resources
@@ -57,7 +57,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.query(%Client{}, %Post{})
+  {:ok, body} = Client.query(%Client{}, %Post{})
 ```
 
 # Creating a resource
@@ -66,7 +66,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.create(%Client{}, %Post{params: [title: "foo", bar: "bar", userId: 1]})
+  {:ok, body} = Client.create(%Client{}, %Post{params: [title: "foo", bar: "bar", userId: 1]})
 ```
 
 # Updating a resource
@@ -75,7 +75,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.update(%Client{use_patch: false}, %Post{id: "1", params: [id: 1, title: "foo", bar: "bar", userId: 1]})
+  {:ok, body} = Client.update(%Client{use_patch: false}, %Post{id: "1", params: [id: 1, title: "foo", bar: "bar", userId: 1]})
 ```
 
 # Updating a resource
@@ -84,7 +84,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.update(%Client{use_patch: true}, %Post{id: "1", params: [title: "foo"]})
+  {:ok, body} = Client.update(%Client{use_patch: true}, %Post{id: "1", params: [title: "foo"]})
 ```
 
 # Deleting a resource
@@ -93,7 +93,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.destroy(%Client{}, %Post{id: "1"})
+  {:ok, body} = Client.destroy(%Client{}, %Post{id: "1"})
 ```
 
 # Filtering resources
@@ -102,7 +102,7 @@ end
   alias RapidaxExample.Client
   alias RapidaxExample.Resource.Post
 
-  {:ok, body} = Rapidax.Client.Http.query(%Client{}, %Post{params: [userId: "1"]})
+  {:ok, body} = Client.query(%Client{}, %Post{params: [userId: "1"]})
 ```
 
 # Nested resources
@@ -112,5 +112,5 @@ end
   alias RapidaxExample.Resource.Post
   alias RapidaxExample.Resource.Comment
 
-  {:ok, body} = Rapidax.Client.Http.query(%Client{}, %Comment{belongs: %Post{id: "1"}})
+  {:ok, body} = Client.query(%Client{}, %Comment{belongs: %Post{id: "1"}})
 ```
