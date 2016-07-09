@@ -9,11 +9,15 @@ defmodule Rapidax.Client.Http do
   end
 
   def query(client, resource) do
-    parse_response(get(build_url(client, resource), [], hackney_options(client) ++ get_options(resource)))
+    build_url(client, resource)
+    |> get([], hackney_options(client) ++ get_options(resource))
+    |> parse_response()
   end
 
   def create(client, resource) do
-    parse_response(post(build_url(client, resource), post_options(resource), %{}, hackney_options(client)))
+    build_url(client, resource)
+    |> post(post_options(resource), %{}, hackney_options(client))
+    |> parse_response
   end
 
   def update(client, resource) do
