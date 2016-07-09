@@ -3,7 +3,7 @@ defmodule Rapidax.Mixfile do
 
   def project do
     [app: :rapidax,
-     version: "0.0.4",
+     version: "0.0.5",
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -29,8 +29,8 @@ defmodule Rapidax.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:cowboy, "~> 1.0"},
-     {:httpoison, "~> 0.8.0"},
-     {:poison, "~> 1.5"}]
+     {:httpoison, "~> 0.9.0"},
+     {:poison, "~> 2.0"}]
   end
 
   defp package do
